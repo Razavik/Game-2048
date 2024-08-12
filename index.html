@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            box-sizing: border-box;
+        }
+
+        *,
+        *::after,
+        *::before{
+            box-sizing: inherit;
+        }
+
+        body{
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #c0c0c0;
+        }
+
+        table {
+            margin: 20px auto;
+            width: max-content;
+            background-color: gray;
+            border-radius: 10px;
+        }
+
+        td {
+            width: clamp(70px, 20vw, 100px);
+            height: clamp(70px, 20vw, 100px);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 500;
+            padding: 0;
+        }
+
+        h1{
+            width: max-content;
+            margin: 0 auto;
+        }
+
+        #up-button, div{
+            margin: 0 auto;
+        }
+
+        div{
+            width: max-content;
+            margin-top: 10px;
+        }
+
+        button{
+            width: clamp(60px, 20vw, 70px);
+            height: clamp(60px, 20vw, 70px);
+            background-color:cornflowerblue;
+            border: none;
+            border-radius: 30%;
+            font-weight: 600;
+            font-size: 30px;
+        }
+
+        button:active{
+            background-color: darkblue;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id="title">Игра 2048!</h1>
+    <table id="game-2048"></table>
+    <button id="up-button" style="display: block;">↑</button>
+    <div>
+        <button id="left-button">←</button>
+        <button id="down-button">↓</button>
+        <button id="right-button">→</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
