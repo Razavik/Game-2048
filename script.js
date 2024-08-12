@@ -35,12 +35,12 @@ class Game {
         console.table(this.field);
         if (this.isGameOver() == 2) {
             document.getElementById("title").innerHTML = "Вы проиграли!";
-        } else if (this.isGameOver() == 1){
+        } else if (this.isGameOver() == 1) {
             document.getElementById("title").innerHTML = "Вы собрали 2048!";
         }
     }
 
-    spawnNumbers(countSpawns = 2) {
+    spawnNumbers(countSpawns = 1) {
         const emptyCells = this.field.flatMap((row, y) =>
             row.map((cell, x) => cell === 0 ? { x, y } : null).filter(Boolean)
         );
@@ -58,6 +58,7 @@ class Game {
 
     moveLeft() {
         let pointerMove = false;
+        let previousField = JSON.stringify(this.field);
 
         for (let x = 1; x < 4; x++) {
             for (let y = 0; y < 4; y++) {
@@ -82,12 +83,17 @@ class Game {
             }
         }
 
-        this.printField();
-        setTimeout(() => { this.spawnNumbers(); }, TIME);
+        if (previousField !== JSON.stringify(this.field)) {
+            this.printField();
+            setTimeout(() => { this.spawnNumbers(); }, TIME);
+        } else {
+            this.printField();
+        }
     }
 
     moveRight() {
         let pointerMove = false;
+        let previousField = JSON.stringify(this.field);
 
         for (let x = 2; x >= 0; x--) {
             for (let y = 0; y < 4; y++) {
@@ -112,12 +118,17 @@ class Game {
             }
         }
 
-        this.printField();
-        setTimeout(() => { this.spawnNumbers(); }, TIME);
+        if (previousField !== JSON.stringify(this.field)) {
+            this.printField();
+            setTimeout(() => { this.spawnNumbers(); }, TIME);
+        } else {
+            this.printField();
+        }
     }
 
     moveUp() {
         let pointerMove = false;
+        let previousField = JSON.stringify(this.field);
 
         for (let y = 1; y < 4; y++) {
             for (let x = 0; x < 4; x++) {
@@ -142,12 +153,17 @@ class Game {
             }
         }
 
-        this.printField();
-        setTimeout(() => { this.spawnNumbers(); }, TIME);
+        if (previousField !== JSON.stringify(this.field)) {
+            this.printField();
+            setTimeout(() => { this.spawnNumbers(); }, TIME);
+        } else {
+            this.printField();
+        }
     }
 
     moveDown() {
         let pointerMove = false;
+        let previousField = JSON.stringify(this.field);
 
         for (let y = 2; y >= 0; y--) {
             for (let x = 0; x < 4; x++) {
@@ -172,8 +188,12 @@ class Game {
             }
         }
 
-        this.printField();
-        setTimeout(() => { this.spawnNumbers(); }, TIME);
+        if (previousField !== JSON.stringify(this.field)) {
+            this.printField();
+            setTimeout(() => { this.spawnNumbers(); }, TIME);
+        } else {
+            this.printField();
+        }
     }
 
     isGameOver() {
@@ -227,19 +247,19 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-document.getElementById("up-button").addEventListener("click", function(){
+document.getElementById("up-button").addEventListener("click", function () {
     game.moveUp();
 });
 
-document.getElementById("left-button").addEventListener("click", function(){
+document.getElementById("left-button").addEventListener("click", function () {
     game.moveLeft();
 });
 
-document.getElementById("down-button").addEventListener("click", function(){
+document.getElementById("down-button").addEventListener("click", function () {
     game.moveDown();
 });
 
-document.getElementById("right-button").addEventListener("click", function(){
+document.getElementById("right-button").addEventListener("click", function () {
     game.moveRight();
 });
 
@@ -248,20 +268,20 @@ let touchendX = 0;
 let touchstartY = 0;
 let touchendY = 0;
 
-document.addEventListener("touchstart", function(event){
+document.addEventListener("touchstart", function (event) {
     touchstartX = event.changedTouches[0].screenX;
     touchstartY = event.changedTouches[0].screenY;
 });
 
-document.addEventListener("touchend", function(event){
+document.addEventListener("touchend", function (event) {
     touchendX = event.changedTouches[0].screenX;
     touchendY = event.changedTouches[0].screenY;
 
-    if(Math.abs(touchendX - touchstartX) > Math.abs(touchendY - touchstartY)){
-        if(touchendX < touchstartX) game.moveLeft();
+    if (Math.abs(touchendX - touchstartX) > Math.abs(touchendY - touchstartY)) {
+        if (touchendX < touchstartX) game.moveLeft();
         else game.moveRight();
-    }else{
-        if(touchendY < touchstartY) game.moveUp();
+    } else {
+        if (touchendY < touchstartY) game.moveUp();
         else game.moveDown();
     }
 });
