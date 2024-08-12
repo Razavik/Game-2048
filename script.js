@@ -40,7 +40,7 @@ class Game {
         }
     }
 
-    spawnNumbers(countSpawns = 1) {
+    spawnNumbers(countSpawns = 2) {
         const emptyCells = this.field.flatMap((row, y) =>
             row.map((cell, x) => cell === 0 ? { x, y } : null).filter(Boolean)
         );
