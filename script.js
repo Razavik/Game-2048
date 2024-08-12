@@ -262,26 +262,3 @@ document.getElementById("down-button").addEventListener("click", function () {
 document.getElementById("right-button").addEventListener("click", function () {
     game.moveRight();
 });
-
-let touchstartX = 0;
-let touchendX = 0;
-let touchstartY = 0;
-let touchendY = 0;
-
-document.addEventListener("touchstart", function (event) {
-    touchstartX = event.changedTouches[0].screenX;
-    touchstartY = event.changedTouches[0].screenY;
-});
-
-document.addEventListener("touchend", function (event) {
-    touchendX = event.changedTouches[0].screenX;
-    touchendY = event.changedTouches[0].screenY;
-
-    if (Math.abs(touchendX - touchstartX) > Math.abs(touchendY - touchstartY)) {
-        if (touchendX < touchstartX) game.moveLeft();
-        else game.moveRight();
-    } else {
-        if (touchendY < touchstartY) game.moveUp();
-        else game.moveDown();
-    }
-});
